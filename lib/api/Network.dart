@@ -5,7 +5,7 @@ import 'dart:convert';
 class NetWork {
   static bool _debug = true;
   //网易新闻的host
-  static String NETEAST_HOST = "https://c.m.163.com/";
+  static String NETEAST_HOST = "http://c.m.163.com/";
   // 新浪图片的host
   static String SINA_PHOTO_HOST = 'http://api.sina.cn/sinago';
   // 天气预报
@@ -64,20 +64,23 @@ class NetWork {
     Map<String, String> header = {};
     header['User-Agent'] =
         'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36';
+    // header['Accept-Encoding'] = "gzip, deflate, br, zstd";
     return header;
   }
 
   static Future<dynamic> getRequest(String url) async {
     try {
-      final response = await http.get(Uri.parse(url));
+      final response =
+          await http.get(Uri.parse(url), headers: getCommonHeader());
       if (response.statusCode == 200) {
-        String data = response.body;
-        return json.decode(data);
+        var data = json.decode(response.body);
+        print('xxdata:${data}');
+        return data;
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
     } catch (e) {
-      print(e);
+      print('Failed to load data: $e');
     }
   }
 

@@ -6,10 +6,6 @@ import 'dart:convert';
 import 'package:flutter_news/widgets/Newslistwidget.dart';
 
 class HomePage extends StatefulWidget {
-  // HomePage({key: key}) : super(key: key);
-
-  // HomePageState createState() => _HomePageState();
-
   const HomePage({super.key});
 
   @override
@@ -17,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late TabController _tabController;
   late List<Channel> channels = [];
 
@@ -25,7 +21,6 @@ class _HomePageState extends State<HomePage>
   initState() {
     super.initState();
     _initChannelData();
-    _tabController = TabController(length: channels.length, vsync: this);
   }
 
   @override
@@ -34,20 +29,33 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
-  //加载初始化json数据
-  _initChannelData() {
-    debugPrint(" --- 数据初始化 --- ");
-    Future<String> data =
-        DefaultAssetBundle.of(context).loadString("assets/config/channel.json");
+  Future<void> _initChannelData() async {
+    // Initialize the TabController with the current length of channels.
+    // This will be updated once we load the channel data.
+    _tabController = TabController(length: channels.length, vsync: this);
+    debugPrint(
+        " --- 数据初始化 --- "); // Assuming you're logging initialization in Chinese
 
-    data.then((String value) {
+    try {
+      // Load the JSON string from the assets
+      String dataString = await DefaultAssetBundle.of(context)
+          .loadString("assets/config/channel.json");
+      // Decode the JSON string into a dynamic structure
+      List<dynamic> jsonData = json.decode(dataString);
+
+      // Clear existing channels (if necessary) and populate with new data
       setState(() {
-        List<dynamic> data = json.decode(value);
-        for (var tmp in data) {
+        channels.clear();
+        for (var tmp in jsonData) {
           channels.add(Channel.fromJson(tmp));
         }
+        debugPrint("channels data: $channels");
+        // Update the TabController with the new length of channels
+        _tabController = TabController(length: channels.length, vsync: this);
       });
-    });
+    } catch (e) {
+      debugPrint("Failed to load channel data: $e");
+    }
   }
 
   PreferredSizeWidget _initChannelTitle() {
