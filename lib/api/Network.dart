@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class NetWork {
-  static bool _debug = true;
+  static const bool _debug = true;
   //网易新闻的host
   static String NETEAST_HOST = "http://c.m.163.com/";
   // 新浪图片的host
@@ -74,7 +74,7 @@ class NetWork {
           await http.get(Uri.parse(url), headers: getCommonHeader());
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
-        print('xxdata:${data}');
+        print('xxdata:$data');
         return data;
       } else {
         print('Request failed with status: ${response.statusCode}.');

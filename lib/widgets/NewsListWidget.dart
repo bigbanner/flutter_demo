@@ -90,7 +90,7 @@ class _NewsListState extends State<NewsListWidget>
   }
 
   Widget _renderRow(int position) {
-    if (position.isOdd) return Divider();
+    if (position.isOdd) return const Divider();
 
     final index = position ~/ 2;
     News data = _datas[index];
@@ -165,7 +165,7 @@ class _NewsListState extends State<NewsListWidget>
         itemBuilder: (context, i) => _renderRow(i),
         controller: _listController,
       );
-      return RefreshIndicator(child: listView, onRefresh: _pullToRefresh);
+      return RefreshIndicator(onRefresh: _pullToRefresh, child: listView);
     }
   }
 }
