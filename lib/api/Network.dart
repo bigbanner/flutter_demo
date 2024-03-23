@@ -1,4 +1,5 @@
 import 'package:flutter_news/constants/Constants.dart';
+import 'package:flutter_news/constants/Global.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -61,10 +62,20 @@ class NetWork {
   }
 
   static Map<String, String> getCommonHeader() {
-    Map<String, String> header = {};
+    String? token = TokenManager().token;
+    String encodedString = base64Encode(utf8.encode('saber:saber_secret'));
+    // Map<String, String> header={}
+    Map<String, String> header = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Authorization": 'Basic $encodedString',
+      "Host": 'rpasys.com',
+      'App-Code':'0eluq284',
+      'Blade-Auth': 'bearer $token',
+    };
     header['User-Agent'] =
         'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36';
-    // header['Accept-Encoding'] = "gzip, deflate, br, zstd";
+    
+    print('header: $header');
     return header;
   }
 
@@ -84,11 +95,11 @@ class NetWork {
   }
 
   static Future<dynamic> postRequest(String url,
-      {Map<String, dynamic>? body}) async {
+     {Map<String, dynamic>? body}) async {
     try {
       final response = await http.post(
         Uri.parse(url),
-        headers: {"Content-Type": "application/json"},
+        headers: getCommonHeader(),
         body: json.encode(body),
       );
       if (response.statusCode == 200) {

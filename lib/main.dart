@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 // import 'pages/HomePage.dart';
 import 'pages/index.dart';
-import 'package:provider/provider.dart';
 import 'provider/auth_provider.dart';
 
 void main() {
-  runApp(MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-      ],
-      child:const FlutterNews(),
-    ),);
+    runApp(const FlutterNews());
   
 }
 

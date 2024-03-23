@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/pages/classForm.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage>{
+
+  void gotoClassForm (){
+      if(true){
+        Navigator.push(context,MaterialPageRoute(builder: (context) => const ClassFormPage()));
+      }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +40,15 @@ class WelcomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const ElevatedButton(
-            onPressed:null,
-            child:Text(
-                '开始',
-                style: TextStyle(
-                  fontSize: 20,
+            ElevatedButton(
+              onPressed: gotoClassForm,
+              child: const Text(
+                  '开始',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
-              ),
-          ),
+            ),
           ],
         ),
       ),

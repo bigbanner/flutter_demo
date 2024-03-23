@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/constants/Global.dart';
 import 'package:flutter_news/pages/Welcome.dart';
-import 'package:flutter_news/provider/auth_provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
-import 'package:provider/provider.dart';
 
 class Index extends StatelessWidget{
   const Index({super.key});
@@ -56,7 +55,7 @@ class _FormExampleState extends State<FormExample> {
       // 解析JSON（如果响应体是JSON格式的话）  
       final data = jsonDecode(bodyString); 
       print('response:$data');
-      Provider.of<AuthProvider>(context, listen: false).setToken(data['access_token']);
+      TokenManager().setToken(data['access_token']);
        Navigator.push(context,
                 MaterialPageRoute(
                     builder: (context) => const WelcomePage()));
