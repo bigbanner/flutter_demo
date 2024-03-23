@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'pages/HomePage.dart';
+// import 'pages/HomePage.dart';
+import 'pages/index.dart';
+import 'package:provider/provider.dart';
+import 'provider/auth_provider.dart';
 
 void main() {
-  runApp(const FlutterNews());
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+      child:const FlutterNews(),
+    ),);
+  
 }
 
 class FlutterNews extends StatefulWidget {
@@ -26,6 +35,6 @@ class _FlutterNewsState extends State<FlutterNews> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme,
-        home: const HomePage());
+        home: const Index());
   }
 }
