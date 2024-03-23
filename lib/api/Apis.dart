@@ -29,8 +29,8 @@ class API$Neteast {
     var data = await NetWork.getRequest(url);
     try {
       // Attempt to decode the JSON response
-      Map<String, dynamic> map = json.decode(data);
-      print(data);
+      Map<String, dynamic> map = data;
+      // print('map:$map');
       // Assuming BeanEvent is properly defined and NewsList has a fromJson method that matches this usage
       Constants.eventBus
           .fire(BeanEvent<NewsList>(id, NewsList.fromJson(id, map)));
@@ -51,8 +51,6 @@ class API$Neteast {
     // NetWork.get(url).then((data) {
     //   Map<String, dynamic> map = json.decode(data);
 
-    //   Constants.eventBus
-    //       .fire(BeanEvent<NewsList>(postId, NewsList.fromJson(postId, map)));
-    // });
+    Constants.eventBus.fire(BeanEvent<NewsList>(postId, NewsList.fromJson(postId, data)));
   }
 }

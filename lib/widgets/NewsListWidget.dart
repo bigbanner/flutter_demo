@@ -73,10 +73,10 @@ class _NewsListState extends State<NewsListWidget>
   }
 
   _onItemClick(int position, News data) {
-    if (data.url.isEmpty) {
+    if (data.url=='') {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text(
-            '缺少新闻链接'), // Removed the 'new' keyword, as it's optional in Dart.
+            '缺少新闻链接'), 
         duration: Duration(seconds: 1),
       ));
     } else {
@@ -91,7 +91,6 @@ class _NewsListState extends State<NewsListWidget>
 
   Widget _renderRow(int position) {
     if (position.isOdd) return const Divider();
-
     final index = position ~/ 2;
     News data = _datas[index];
 

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
 import 'package:flutter_news/constants/Constants.dart';
-
-// import 'Newsdetailpage.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});

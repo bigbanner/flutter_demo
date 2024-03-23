@@ -74,7 +74,6 @@ class NetWork {
           await http.get(Uri.parse(url), headers: getCommonHeader());
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
-        print('xxdata:$data');
         return data;
       } else {
         print('Request failed with status: ${response.statusCode}.');

@@ -48,7 +48,7 @@ class News {
   late String? skipType;
   late String? category;
   late String? cid;
-  late String url;
+  late String? url;
   late String? url_3w;
 
   News(
@@ -86,7 +86,7 @@ class News {
       this.skipType,
       this.category,
       this.cid,
-      required this.url,
+      this.url,
       this.url_3w});
 
   News.fromJson(Map<String, dynamic> json) {

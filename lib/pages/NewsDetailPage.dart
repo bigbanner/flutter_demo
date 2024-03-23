@@ -20,15 +20,6 @@ class NewsDetailPageState extends State<NewsDetailPage> {
   @override
   void initState() {
     super.initState();
-    // late WebViewController _controller;
-    // flutterWebViewPlugin.onStateChanged.listen((state) {
-    //   print("state: ${state.type}");
-    //   if (state.type == WebViewState.finishLoad) {
-    //     setState(() {
-    //       loaded = true;
-    //     });
-    //   }
-    // });
   }
 
   @override
@@ -50,12 +41,9 @@ class NewsDetailPageState extends State<NewsDetailPage> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: WebView(
-        initialUrl: 'https://flutter.dev',
+        initialUrl: widget.url=='' ? 'https://flutter.dev/' : widget.url as String,
         onWebViewCreated: (WebViewController webViewController) {
           // print("webViewController:${webViewController}");
-          // setState(() {
-          //   // _controller = webViewController;
-          // });
         },
         onPageFinished: (url) => {
           setState(() {

@@ -33,24 +33,17 @@ class _HomePageState extends State<HomePage>
     // Initialize the TabController with the current length of channels.
     // This will be updated once we load the channel data.
     _tabController = TabController(length: channels.length, vsync: this);
-    debugPrint(
-        " --- 数据初始化 --- "); // Assuming you're logging initialization in Chinese
-
     try {
       // Load the JSON string from the assets
       String dataString = await DefaultAssetBundle.of(context)
           .loadString("assets/config/channel.json");
-      // Decode the JSON string into a dynamic structure
       List<dynamic> jsonData = json.decode(dataString);
 
-      // Clear existing channels (if necessary) and populate with new data
       setState(() {
         channels.clear();
         for (var tmp in jsonData) {
           channels.add(Channel.fromJson(tmp));
         }
-        debugPrint("channels data: $channels");
-        // Update the TabController with the new length of channels
         _tabController = TabController(length: channels.length, vsync: this);
       });
     } catch (e) {
