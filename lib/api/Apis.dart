@@ -1,5 +1,6 @@
 import 'package:flutter_news/constants/Constants.dart';
 import 'package:flutter_news/events/BeanEvent.dart';
+import 'package:flutter_news/models/network/ClassList.dart';
 import 'package:flutter_news/models/network/NewsList.dart';
 import 'package:flutter_news/models/network/classForm.dart';
 
@@ -71,9 +72,9 @@ class API$Neteast {
       'flowCode':"lf1770747249889992706",
       'params':{
         'modelId':{
-          's01d2a6b66a1c254d77a06d28ea88d38bb0':aClass,
-          's010f2595bacf1f4e9cb007d380ce847b3d':name,
-          's019dffb19273c24116a8ccfd5db099d246':age,
+          's01d2a6b66a1c254d77a06d28ea88d38bb0':age,
+          's010f2595bacf1f4e9cb007d380ce847b3d':aClass,
+          's019dffb19273c24116a8ccfd5db099d246':name,
         }
       }
     };
@@ -86,6 +87,34 @@ class API$Neteast {
       // Assuming BeanEvent is properly defined and NewsList has a fromJson method that matches this usage
       // Constants.eventBus
       //     .fire(BeanEvent('FCD1770616154007597058', ClassForm.fromJson(id, map)));
+    } catch (e) {
+      // print('Error decoding JSON or firing event: $e');
+      // Handle the error or notify the user
+    }
+  }
+
+
+  
+  // 请求班级列表页
+  getClassList(int page) async {
+   late Map<String, dynamic> queryParams = {
+      'flowCode':"lf1770746336338526209",
+      'params':{
+        '_current_':page,
+        '_size_':50
+      }
+    };
+    String url =
+        'https://www.rpasys.com/api/rpasys-logic/logic/engine/execute/v2?flowName=%E7%8F%AD%E7%BA%A7%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2';
+
+    var data = await NetWork.getRequest(url,queryParams:queryParams);
+    try {
+      // Attempt to decode the JSON response
+      Map<String, dynamic> map = data;
+      print('map:$map');
+      // Assuming BeanEvent is properly defined and NewsList has a fromJson method that matches this usage
+      Constants.eventBus
+          .fire(BeanEvent('lf1770746336338526209', ClassFormListModel.fromJson('lf1770746336338526209', map)));
     } catch (e) {
       // print('Error decoding JSON or firing event: $e');
       // Handle the error or notify the user

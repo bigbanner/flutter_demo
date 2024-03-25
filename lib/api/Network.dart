@@ -68,7 +68,7 @@ class NetWork {
     Map<String, String> header = {
       'Content-Type': 'application/json; charset=UTF-8',
       "Authorization": 'Basic $encodedString',
-      "Host": 'rpasys.com',
+      "Host": 'www.rpasys.com',
       'App-Code':'0eluq284',
       'Blade-Auth': 'bearer $token',
     };
@@ -79,10 +79,15 @@ class NetWork {
     return header;
   }
 
-  static Future<dynamic> getRequest(String url) async {
+  static Future<dynamic> getRequest(String url,{Map<String, dynamic>? queryParams}) async {
+    var uri =  Uri.parse(url);
+    if(queryParams!=null){
+      uri = uri.replace(queryParameters: queryParams);
+    }
+   
     try {
       final response =
-          await http.get(Uri.parse(url), headers: getCommonHeader());
+          await http.get(uri, headers: getCommonHeader(),);
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
         return data;

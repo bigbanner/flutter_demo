@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news/api/Apis.dart';
 import 'package:flutter_news/constants/Constants.dart';
 import 'package:flutter_news/models/network/classForm.dart';
+import 'package:flutter_news/widgets/classFormWidget.dart';
 
 class ClassFormPage extends StatelessWidget{
   const ClassFormPage({super.key});
@@ -51,7 +52,9 @@ void initState (){
     print('班级是$classStr');
     print('姓名是$nameStr');
     print('年龄是$age');
-    _api.submitClassForm(classStr,nameStr,age);
+
+    await _api.submitClassForm(classStr,nameStr,age);
+    Navigator.push(context,MaterialPageRoute(builder: (context) => const ClassFormList()));
   }
 
   @override
