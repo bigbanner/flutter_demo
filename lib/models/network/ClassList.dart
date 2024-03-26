@@ -27,7 +27,7 @@ class DataModel {
       {required this.list });
 
   DataModel.fromJson(Map<String, dynamic> json) {
-    list = json['list'];
+    list = ListModel.fromJson(json['list']);
   }
   
 
@@ -86,9 +86,9 @@ class RecordsItem {
   late int? is_enabled;
   late int? process_status;
   late int? published_status;
-  late String s01d2a6b66a1c254d77a06d28ea88d38bb0; //班级
-  late String s010f2595bacf1f4e9cb007d380ce847b3d; //姓名
-  late String s019dffb19273c24116a8ccfd5db099d246; // 年龄
+  late String? s01d2a6b66a1c254d77a06d28ea88d38bb0; //班级
+  late String? s010f2595bacf1f4e9cb007d380ce847b3d; //姓名
+  late String? s019dffb19273c24116a8ccfd5db099d246; // 年龄
   late String? tenant_id;
   late String? update_time;
   late String? update_user;
@@ -103,9 +103,9 @@ class RecordsItem {
     this.is_deleted,
     this.is_enabled,
     this.process_status,
-   required this.s01d2a6b66a1c254d77a06d28ea88d38bb0,
-   required this.s010f2595bacf1f4e9cb007d380ce847b3d,
-   required this.s019dffb19273c24116a8ccfd5db099d246,
+    this.s01d2a6b66a1c254d77a06d28ea88d38bb0,
+    this.s010f2595bacf1f4e9cb007d380ce847b3d,
+    this.s019dffb19273c24116a8ccfd5db099d246,
     this.tenant_id,
     this.update_time,
     this.update_user,

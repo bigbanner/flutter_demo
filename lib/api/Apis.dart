@@ -97,7 +97,7 @@ class API$Neteast {
   
   // 请求班级列表页
   getClassList(int page) async {
-   late Map<String, dynamic> queryParams = {
+   late Map<String, dynamic> body = {
       'flowCode':"lf1770746336338526209",
       'params':{
         '_current_':page,
@@ -107,11 +107,11 @@ class API$Neteast {
     String url =
         'https://www.rpasys.com/api/rpasys-logic/logic/engine/execute/v2?flowName=%E7%8F%AD%E7%BA%A7%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2';
 
-    var data = await NetWork.getRequest(url,queryParams:queryParams);
+    var data = await NetWork.postRequest(url,body:body);
     try {
       // Attempt to decode the JSON response
-      Map<String, dynamic> map = data;
-      print('map:$map');
+      Map<String, dynamic> map = data['data'];
+      print('map getClassList:$map');
       // Assuming BeanEvent is properly defined and NewsList has a fromJson method that matches this usage
       Constants.eventBus
           .fire(BeanEvent('lf1770746336338526209', ClassFormListModel.fromJson('lf1770746336338526209', map)));

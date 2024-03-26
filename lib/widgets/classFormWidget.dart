@@ -72,20 +72,51 @@ class _ClassFormListState extends State<ClassFormList>
     RecordsItem data = _datas[index];
 
     return Card(
-      color: Colors.grey[250],
-      elevation: 5.0,
-      child: const InkWell(
+      color: Colors.blue[200],
+      elevation: 1.0,
+      child: InkWell(
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
            Expanded(
-              child: Text('aa1', textAlign: TextAlign.center),
+              child: Container(
+                height: 50,
+                color: Colors.amber[600],
+                padding:const EdgeInsets.only(left: 20) ,
+                child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children:[
+                  const Text('班级:' , textAlign: TextAlign.center),
+                  Text(data.s010f2595bacf1f4e9cb007d380ce847b3d ?? '' , textAlign: TextAlign.center),
+                ],
+              ),
+              )
             ),
             Expanded(
-              child: Text('ss2', textAlign: TextAlign.center),
+               child:Container(
+                height: 50,
+                padding:const EdgeInsets.only(left: 20) ,
+                child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children:[
+                  const Text('姓名:' , textAlign: TextAlign.center),
+                  Text(data.s019dffb19273c24116a8ccfd5db099d246 ?? '' , textAlign: TextAlign.center),
+                ],
+              ),
+              ),
             ),
-            Expanded(
-              child: Text('ss3', textAlign: TextAlign.center),
+            Expanded(/*  */
+             child:Container(
+                height: 50,
+                padding:const EdgeInsets.only(left: 20) ,
+                child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children:[
+                  const Text('年龄:' , textAlign: TextAlign.center),
+                  Text(data.s01d2a6b66a1c254d77a06d28ea88d38bb0 ?? '' , textAlign: TextAlign.center),
+                ],
+              ),
+              ),
             ),
           ],
         ),
@@ -100,7 +131,7 @@ class _ClassFormListState extends State<ClassFormList>
       return const Center(child: CircularProgressIndicator());
     } else {
       Widget listView = ListView.builder(
-        padding:const EdgeInsets.all(10.0),
+        padding:const EdgeInsets.all(1.0),
         itemCount: _datas.length * 2,
         itemBuilder: (context, i) => _renderRow(i),
         controller: _listController,
